@@ -1,0 +1,26 @@
+<!-- templates/movies_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies List</title>
+</head>
+<body>
+    <h1>Movies List</h1>
+    <ul>
+        {% for movie in movies %}
+            <li>
+                <h2>{{ movie.title }}</h2>
+                <p>{{ movie.description }}</p>
+                <p>Duration: {{ movie.duration }}</p>
+                <p>Category: {{ movie.category }}</p>
+                <!-- Replace the link with your actual URL or use movie.video_link if applicable -->
+                <a href="{{ movie.video_link }}">Watch Now</a>
+                <img src="{{ movie.thumbnail.url }}" alt="Thumbnail">
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Subscriptions</title>
+</head>
+<body>
+    <h1>Manage Subscriptions</h1>
+    <ul>
+        {% for subscription in user_subscriptions %}
+            <li>{{ subscription.plan.name }} - {{ subscription.start_date }} to {{ subscription.end_date }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
