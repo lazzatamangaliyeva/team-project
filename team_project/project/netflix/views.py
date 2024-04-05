@@ -20,13 +20,13 @@ class RegisterView(View):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}!')
-            return redirect('choose_subscription.html')  # Redirect to subscription selection page
+            return redirect('choose-subscription.html')  # Redirect to subscription selection page
         return render(request, 'register.html', {'form': form})
 
 class ChooseSubscriptionView(View):
     def get(self, request):
         plans = SubscriptionPlan.objects.all()
-        return render(request, 'choose_subscription.html', {'plans': plans})
+        return render(request, 'choose-subscription.html', {'plans': plans})
 
 class PaymentView(View):
     def post(self, request):
@@ -142,7 +142,7 @@ class ProcessPaymentView(View):
         payment_method = request.POST.get('payment_method')
         transaction_id = '123456'  # Dummy transaction ID for demonstration
         Payment.objects.create(user=request.user, amount=amount, payment_method=payment_method, transaction_id=transaction_id, status='success')
-        return redirect('manage_subscriptions')
+        return redirect('manage_subscriptions.html')
     
 # # class UserPageView(View):
 # #     def get(self, request):
@@ -172,27 +172,19 @@ class ProcessPaymentView(View):
 
 
 class CustomLoginView(LoginView):
-    template_name = 'login.html'
-    authentication_form = AuthenticationForm
 
-    def get_success_url(self):
-        # Redirect to the subscription page after successful login
-        return '/choose-subscription/'
-
-    def form_valid(self, form):
-        # Add a custom message to the user upon successful login
-        username = form.cleaned_data.get('username')
-        messages.success(self.request, f'Welcome back, {username}! You are now logged in.')
-        return super().form_valid(form)
-
-# # def choose_subscription(request):
-# #     if request.method == 'POST':
-# #         form = SubscriptionForm(request.POST)
-# #         if form.is_valid():
-# #             # Process the subscription form data
-# #             # This could include creating a subscription for the user, etc.
-# #             return redirect('home')  # Redirect to the home page after subscription
-# #     else:
-# #         form = SubscriptionForm()
-
-# #     return render(request, 'choose_subscription.html', {'form': form})
+    @login_required
+    # def get_success_url(self):
+    #     # Redirect to the subscription page after successful login
+    #     return '/choose-subscription.html/'
+  
+    def get(self, request):
+        user = request.user
+        subscription = Subscription.objects.filter(user=user).first()
+        movies = Movie.objects.all()  # Adjust this query to filter movies based on user's subscription, if needed
+        context = {
+            'user': user,
+            'subscription': subscription,
+            'movies': movies
+        }
+        return render(request, 'user_page.html', context)

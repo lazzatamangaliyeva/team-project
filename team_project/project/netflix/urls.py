@@ -12,8 +12,8 @@ urlpatterns = [
     path('process_payment/', ProcessPaymentView.as_view(), name='process_payment'),
     path('user_page/', UserPageView.as_view(), name='user_page'),
     path('register/', RegisterView.as_view(), name='register'),
-    path('login/', CustomLoginView.as_view(), name='register'),
-    path('choose_subscription/', ChooseSubscriptionView.as_view(), name='choose_subscription')
+    path('login/', CustomLoginView.as_view(), name='login'),
+    path('choose-subscription/', ChooseSubscriptionView.as_view(), name='choose_subscription')
 ]
 
 
