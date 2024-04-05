@@ -19,7 +19,9 @@ from django.urls import path, include
 from netflix import views, urls
 import netflix
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('netflix/', include('netflix.urls')),
+    path('netflix/', include('netflix.urls', namespace='netflix')),
 ]

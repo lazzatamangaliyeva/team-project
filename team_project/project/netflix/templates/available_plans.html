@@ -16,7 +16,7 @@
             <li>1 device at a time</li>
             <!-- Add more features here if needed -->
         </ul>
-        <form action="{% url 'subscribe' %}" method="post">
+        <form action="{% url 'netflix:choose_subscription' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="plan_id" value="1"> <!-- Adjust plan_id based on your SubscriptionPlan model -->
             <button type="submit">Subscribe</button>
@@ -31,7 +31,7 @@
             <li>2 devices at a time</li>
             <!-- Add more features here if needed -->
         </ul>
-        <form action="{% url 'subscribe' %}" method="post">
+        <form action="{% url 'netflix:choose_subscription' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="plan_id" value="2"> <!-- Adjust plan_id based on your SubscriptionPlan model -->
             <button type="submit">Subscribe</button>
@@ -46,7 +46,7 @@
             <li>4 devices at a time</li>
             <!-- Add more features here if needed -->
         </ul>
-        <form action="{% url 'subscribe' %}" method="post">
+        <form action="{% url 'netflix:chose_subscription' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="plan_id" value="3"> <!-- Adjust plan_id based on your SubscriptionPlan model -->
             <button type="submit">Subscribe</button>
